@@ -82,24 +82,24 @@ class Clock {
       let displayHours = this.getHours()
       let displayMinutes = this.getMinutes()
       let displaySeconds = this.getSeconds()
-      let suffix = ''
+      let meridiem = ''
 
-      if (getFormat() == '12-hour format') {
+      if (this.getFormat() == '12-hour format') {
         if (displayHours == 12) {
-          suffix = 'PM'
+          meridiem = 'PM'
         }
         if (displayHours > 12) {
           displayHours = displayHours - 12
-          suffix = 'PM'
+          meridiem = 'PM'
         }
         else {
-          suffix = 'AM'
+          meridiem = 'AM'
         }
       } else {
-        if (displayHours => 12) {
-          suffix = 'PM'
+        if (displayHours >= 12) {
+          meridiem = 'PM'
       } else {
-        suffix = 'AM'
+        meridiem = 'AM'
       }
 
       // now format as strings
@@ -118,15 +118,16 @@ class Clock {
       if (displaySeconds < 10) {
         displaySeconds = `0${displaySeconds} `
       } else {
-        displaySeconds = `0${displaySeconds} `
+        displaySeconds = `${displaySeconds} `
       }
 
-      let time = displayHours + displayMinutes + displaySeconds + suffix
+      let time = displayHours + displayMinutes + displaySeconds + meridiem
       console.log('time is ', time)
       return time
     }
   }
 }
 
-var clock = new Clock({ hours: 16, minutes: 30, seconds: 15 })
-console.log('oh god ', clock)
+module.exports = { Clock }
+// var clock = new Clock({ hours: 16, minutes: 30, seconds: 15 })
+// console.log(clock.getTime())
